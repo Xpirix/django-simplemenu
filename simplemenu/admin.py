@@ -1,11 +1,11 @@
 from django import forms
 from django.conf import settings
-from django.conf.urls.defaults import patterns
 from django.contrib import admin
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
+from django.conf.urls import patterns, include, url
 
 from simplemenu.models import MenuItem, URLItem, Menu
 from simplemenu.forms import MenuItemForm
