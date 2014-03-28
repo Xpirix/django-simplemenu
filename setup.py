@@ -7,5 +7,5 @@ setup(name='django-simplemenu',
       description='Menu app for Django with ordering and ability to link menu item with model instance, view or URL.',
       author='Alex Vasi, Alessandro Pasotti',
       author_email='eee@someuser.com',
-      package_data={'simplemenu': ['*']},
+      package_data={'': ['*.*']},
       packages=['simplemenu', 'simplemenu.templatetags'])
