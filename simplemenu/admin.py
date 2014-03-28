@@ -32,7 +32,7 @@ class MenuItemAdmin(admin.ModelAdmin):
         """
         Returns html with links to move_up and move_down views.
         """
-        button = u'<a href="%s"><img src="%s/simplemenu/admin/arrow-%s.gif" /> %s</a>'
+        button = u'<a href="%s"><img src="%ssimplemenu/arrow-%s.gif" /> %s</a>'
         prefix = settings.STATIC_URL
         
         link = '%d/move_up/' % obj.pk
