@@ -12,7 +12,7 @@ class MenuItemForm(forms.ModelForm):
         fields = ('name','menu')
 
     def __init__(self, data=None, files=None, auto_id='id_%s', prefix=None,
-                 initial=None, error_class=forms.util.ErrorList,
+                 initial=None, error_class=forms.utils.ErrorList,
                  label_suffix=':', empty_permitted=False, instance=None):
         if instance:
             if not initial:
