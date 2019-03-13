@@ -41,7 +41,7 @@ class PageWrapper(object):
         if self._name:
             name = self._name
         elif self.urlobj:
-            name = unicode(self.urlobj)
+            name = str(self.urlobj)
         elif "/" in self.urlstr:
             name = self.urlstr
         else:
@@ -80,11 +80,11 @@ def get_registered_pages():
         if isinstance(reg, tuple):
             reg, name = reg
         if isinstance(reg, QuerySet):
-            # Name is the given attr if possible elsewise just use unicode(obj)
+            # Name is the given attr if possible elsewise just use str(obj)
             if not name:
-                f  = lambda obj: PageWrapper(obj, unicode(obj))
+                f  = lambda obj: PageWrapper(obj, str(obj))
             else:
-                f  = lambda obj: PageWrapper(obj, getattr(obj, name, unicode(obj)))
+                f  = lambda obj: PageWrapper(obj, getattr(obj, name, str(obj)))
             # evaluating QuerySet objects by iteration
             pages.extend(map(f, reg))
         else:
