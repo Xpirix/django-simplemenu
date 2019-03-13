@@ -30,7 +30,6 @@ class MenuItemForm(forms.ModelForm):
         Returns list of 2-tuples ('page unique key', 'page name')
         to fill the ChoiceField.
         """
-        from IPython import embed; embed(using=False)
         choices = []
         for p in self._registered_pages_cache:
             choices.append((p.strkey(), p.name()))

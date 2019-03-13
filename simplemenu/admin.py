@@ -6,7 +6,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
 from django.urls import include, re_path
-
+from django.utils.html import mark_safe
 from simplemenu.models import MenuItem, URLItem, Menu
 from simplemenu.forms import MenuItemForm
 
@@ -35,14 +35,15 @@ class MenuItemAdmin(admin.ModelAdmin):
         """
         Returns html with links to move_up and move_down views.
         """
-        button = u'<a href="%s"><img src="%ssimplemenu/arrow-%s.gif" /> %s</a>'
+        button = '<a href="%s"><img src="%ssimplemenu/arrow-%s.gif" /> %s</a>'
         prefix = settings.STATIC_URL
 
         link = '%d/move_up/' % obj.pk
         html = button % (link, prefix, 'up', _('up')) + " | "
         link = '%d/move_down/' % obj.pk
         html += button % (link, prefix, 'down', _('down'))
-        return html
+        return  mark_safe(html)
+
     move.allow_tags = True
     move.short_description = ugettext_lazy('Move')
 
