@@ -1,4 +1,4 @@
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -25,19 +25,19 @@ class MenuItem(models.Model):
     All items in the menu are ordered by ``rank``.
     """
     name = models.CharField(_('Caption'), max_length=64)
-    menu = models.ForeignKey(Menu)
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     rank = models.SmallIntegerField(unique=True, db_index=True)
 
-    urlobj_content_type = models.ForeignKey(ContentType, null=True)
+    urlobj_content_type = models.ForeignKey(ContentType, null=True, on_delete=models.CASCADE)
     urlobj_id = models.PositiveIntegerField(null=True)
-    urlobj = generic.GenericForeignKey('urlobj_content_type', 'urlobj_id')
+    urlobj = GenericForeignKey('urlobj_content_type', 'urlobj_id')
     urlstr = models.CharField(max_length=255)
 
     class Meta:
         ordering = ['rank']
         verbose_name = _('menu item')
         verbose_name_plural = _('menu items')
-    
+
     def __unicode__(self):
         return self.name
 

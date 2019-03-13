@@ -1,7 +1,7 @@
 import copy
 import types
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db.models.query import QuerySet
 
 registry = []
@@ -10,7 +10,7 @@ def register(*args):
     """
     Register urls, views, model instances and QuerySets to be potential
     pages for menu items.
-    
+
     Example::
 
         import simplemenu
@@ -82,7 +82,7 @@ def get_registered_pages():
             reg, name = reg
         if isinstance(reg, QuerySet):
             # Name is the given attr if possible elsewise just use unicode(obj)
-            if not name: 
+            if not name:
                 f  = lambda obj: PageWrapper(obj, unicode(obj))
             else:
                 f  = lambda obj: PageWrapper(obj, getattr(obj, name, unicode(obj)))

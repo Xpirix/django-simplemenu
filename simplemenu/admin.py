@@ -5,7 +5,7 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
-from django.conf.urls import patterns, include, url
+from django.urls import include, re_path
 
 from simplemenu.models import MenuItem, URLItem, Menu
 from simplemenu.forms import MenuItemForm
@@ -34,7 +34,7 @@ class MenuItemAdmin(admin.ModelAdmin):
         """
         button = u'<a href="%s"><img src="%ssimplemenu/arrow-%s.gif" /> %s</a>'
         prefix = settings.STATIC_URL
-        
+
         link = '%d/move_up/' % obj.pk
         html = button % (link, prefix, 'up', _('up')) + " | "
         link = '%d/move_down/' % obj.pk
@@ -45,10 +45,10 @@ class MenuItemAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         admin_view = self.admin_site.admin_view
-        urls = patterns('',
-            (r'^(?P<item_pk>\d+)/move_up/$', admin_view(self.move_up)),
-            (r'^(?P<item_pk>\d+)/move_down/$', admin_view(self.move_down)),
-        )
+        urls = [
+            re_path(r'^(?P<item_pk>\d+)/move_up/$', admin_view(self.move_up)),
+            re_path(r'^(?P<item_pk>\d+)/move_down/$', admin_view(self.move_down)),
+        ]
         return urls + super(MenuItemAdmin, self).get_urls()
 
     def move_up(self, request, item_pk):
@@ -75,6 +75,16 @@ class MenuItemAdmin(admin.ModelAdmin):
             raise PermissionDenied
         return redirect('admin:simplemenu_menuitem_changelist')
 
+
+class MenuAdmin(admin.ModelAdmin):
+    list_display = ('name', )
+
+
+class UrlItemAdmin(admin.ModelAdmin):
+    list_display = ('name', 'url')
+
+
+
 admin.site.register(MenuItem, MenuItemAdmin)
-admin.site.register(URLItem)
-admin.site.register(Menu)
+admin.site.register(URLItem, UrlItemAdmin)
+admin.site.register(Menu, MenuAdmin)

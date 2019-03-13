@@ -49,7 +49,7 @@ def get_simplemenu(parser, token):
 def get_namedmenu(parser, token):
     """
     Usage::
-        
+
         {% get_namedmenu [menu] as [varname] %}
     """
     bits = token.split_contents()
