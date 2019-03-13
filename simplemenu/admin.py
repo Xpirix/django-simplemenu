@@ -10,6 +10,7 @@ from django.urls import include, re_path
 from simplemenu.models import MenuItem, URLItem, Menu
 from simplemenu.forms import MenuItemForm
 
+
 class MenuItemAdmin(admin.ModelAdmin):
     form = MenuItemForm
     list_display = ('item_name', 'move', 'page')
@@ -22,10 +23,12 @@ class MenuItemAdmin(admin.ModelAdmin):
     def item_name(self, obj):
         # just to forbid sorting by name
         return obj.name
+
     item_name.short_description = ugettext_lazy('Item caption')
 
     def page(self, obj):
         return obj.page.name()
+
     page.short_description = ugettext_lazy('Page')
 
     def move(sefl, obj):
@@ -82,7 +85,6 @@ class MenuAdmin(admin.ModelAdmin):
 
 class UrlItemAdmin(admin.ModelAdmin):
     list_display = ('name', 'url')
-
 
 
 admin.site.register(MenuItem, MenuItemAdmin)

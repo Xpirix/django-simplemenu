@@ -8,7 +8,7 @@ from simplemenu.pages import PageWrapper
 class Menu(models.Model):
     name = models.CharField(max_length=64)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class MenuItem(models.Model):
@@ -38,7 +38,7 @@ class MenuItem(models.Model):
         verbose_name = _('menu item')
         verbose_name_plural = _('menu items')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def save(self, *args, **kwargs):
@@ -135,7 +135,7 @@ class URLItem(models.Model):
     name = models.CharField(_('Caption'), max_length=64)
     url = models.CharField(max_length=255)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s (%s)" % (self.name, self.url)
 
     def get_absolute_url(self):

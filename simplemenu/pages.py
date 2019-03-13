@@ -1,5 +1,4 @@
 import copy
-import types
 
 from django.urls import reverse
 from django.db.models.query import QuerySet
@@ -30,7 +29,7 @@ class PageWrapper(object):
     strings.
     """
     def __init__(self, urlobj_or_str, name=None):
-        if isinstance(urlobj_or_str, types.StringTypes):
+        if isinstance(urlobj_or_str, str):
             self.urlobj = None
             self.urlstr = urlobj_or_str
         else:
@@ -78,7 +77,7 @@ def get_registered_pages():
     pages = []
     for reg in map(copy.deepcopy, registry):
         name = None
-        if isinstance(reg, types.TupleType):
+        if isinstance(reg, tuple):
             reg, name = reg
         if isinstance(reg, QuerySet):
             # Name is the given attr if possible elsewise just use unicode(obj)
