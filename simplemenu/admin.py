@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect, get_object_or_404
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy
 from django.urls import include, re_path
 from django.utils.html import mark_safe
