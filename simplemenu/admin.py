@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.translation import ugettext as _
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
 from django.urls import include, re_path
 from django.utils.html import mark_safe
 from simplemenu.models import MenuItem, URLItem, Menu
@@ -24,12 +24,12 @@ class MenuItemAdmin(admin.ModelAdmin):
         # just to forbid sorting by name
         return obj.name
 
-    item_name.short_description = ugettext_lazy('Item caption')
+    item_name.short_description = gettext_lazy('Item caption')
 
     def page(self, obj):
         return obj.page.name()
 
-    page.short_description = ugettext_lazy('Page')
+    page.short_description = gettext_lazy('Page')
 
     def move(sefl, obj):
         """
@@ -45,7 +45,7 @@ class MenuItemAdmin(admin.ModelAdmin):
         return  mark_safe(html)
 
     move.allow_tags = True
-    move.short_description = ugettext_lazy('Move')
+    move.short_description = gettext_lazy('Move')
 
     def get_urls(self):
         admin_view = self.admin_site.admin_view
